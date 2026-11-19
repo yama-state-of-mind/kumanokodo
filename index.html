@@ -52,13 +52,13 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* スマホファースト・和モダンヘッダー */
+    /* ヘッダー */
     .hero {
       position: relative;
       overflow: hidden;
       background: linear-gradient(155deg, #152b20 0%, #244734 55%, #372d23 100%);
       color: #fbf8f1;
-      padding: 22px 16px 26px;
+      padding: 20px 16px 24px;
       border-bottom: 4px solid var(--vermilion);
     }
 
@@ -106,54 +106,23 @@
 
     h1.hero-title {
       margin: 0 0 8px;
-      font-size: 23px;
+      font-size: 22px;
       line-height: 1.3;
       letter-spacing: 0.02em;
     }
 
     .hero-subtitle {
-      margin: 0 0 14px;
-      font-size: 13.5px;
+      margin: 0;
+      font-size: 13px;
       color: rgba(251, 248, 241, 0.92);
     }
 
-    .hero-meta-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .hero-meta-box {
-      background: rgba(255, 253, 249, 0.11);
-      border: 1px solid rgba(255, 253, 249, 0.2);
-      border-radius: var(--radius-md);
-      padding: 9px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-meta-label {
-      font-size: 11.5px;
-      color: rgba(251, 248, 241, 0.78);
-      flex-shrink: 0;
-    }
-
-    .hero-meta-value {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #fffdf9;
-      text-align: right;
-    }
-
-    /* 上部横スクロールナビ */
+    /* 固定タブナビゲーション */
     .top-nav {
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(255, 253, 249, 0.96);
+      background: rgba(255, 253, 249, 0.97);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border-soft);
     }
@@ -173,32 +142,37 @@
       display: none;
     }
 
-    .nav-pill {
+    .nav-tab {
       flex: 0 0 auto;
-      text-decoration: none;
       color: var(--ink-main);
       font-size: 12.5px;
       font-weight: 700;
       padding: 8px 13px;
-      min-height: 36px;
+      min-height: 38px;
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
       background: var(--bg-sub);
       border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
-    .nav-pill:hover,
-    .nav-pill.active {
+    .nav-tab.active {
       background: var(--forest-deep);
       color: #fffdf9;
+      border-color: var(--forest-deep);
     }
 
-    /* コンテナ＆セクション */
+    /* メインコンテナ＆ビュー切り替え */
     .container {
       max-width: 680px;
       margin: 0 auto;
       padding: 14px 12px 0;
+    }
+
+    .view-panel[hidden] {
+      display: none;
     }
 
     section.card-section {
@@ -206,14 +180,14 @@
       border: 1px solid var(--border-soft);
       border-radius: var(--radius-lg);
       padding: 16px 14px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow-card);
     }
 
     .section-head {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
       padding-bottom: 10px;
       margin-bottom: 14px;
       border-bottom: 2px solid var(--bg-sub);
@@ -244,7 +218,7 @@
 
     .ishidatami-divider {
       height: 8px;
-      margin: 2px 0 14px;
+      margin: 4px 0 14px;
       border-radius: 999px;
       background-image:
         linear-gradient(90deg, rgba(29, 59, 43, 0.16) 24px, transparent 24px),
@@ -252,20 +226,6 @@
       background-size: 32px 4px, 26px 4px;
       background-position: 0 0, 10px 4px;
       background-repeat: repeat-x;
-    }
-
-    .alert-box {
-      border-radius: var(--radius-md);
-      padding: 12px 13px;
-      margin: 12px 0;
-      font-size: 13.5px;
-      border-left: 4px solid var(--vermilion);
-      background: #fdf3f1;
-    }
-
-    .alert-box--info {
-      border-left-color: var(--forest-mid);
-      background: #f1f6f3;
     }
 
     .stats-grid {
@@ -294,11 +254,161 @@
       color: var(--forest-deep);
     }
 
+    .alert-box {
+      border-radius: var(--radius-md);
+      padding: 12px 13px;
+      margin: 12px 0;
+      font-size: 13.5px;
+      border-left: 4px solid var(--vermilion);
+      background: #fdf3f1;
+    }
+
+    .alert-box--info {
+      border-left-color: var(--forest-mid);
+      background: #f1f6f3;
+    }
+
+    /* 日程バナー＆タイムライン */
+    .day-banner {
+      background: linear-gradient(90deg, var(--forest-deep), var(--forest-mid));
+      color: #fffdf9;
+      padding: 13px 15px;
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .day-banner h2 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .day-banner-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .day-pill {
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 16px;
+      border-left: 2.5px solid var(--border-soft);
+      margin-left: 5px;
+    }
+
+    .tl-item {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 12px 13px;
+      margin-bottom: 12px;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -22px;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--vermilion);
+      border: 2px solid #fffdf9;
+    }
+
+    .tl-time-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .tl-time {
+      font-weight: 800;
+      color: var(--vermilion);
+      font-size: 13.5px;
+    }
+
+    .tl-title {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--ink-main);
+    }
+
+    .tl-note {
+      margin: 6px 0 0;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    /* 時間帯に組み込む関連ブロック（補給・温泉・エスケープ） */
+    .sub-block {
+      margin-top: 10px;
+      padding: 10px 11px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-paper);
+      border: 1px solid var(--border-soft);
+    }
+
+    .sub-block-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--forest-deep);
+      margin: 0 0 6px;
+    }
+
+    .sub-entry {
+      padding: 7px 0;
+      border-top: 1px dashed var(--border-soft);
+    }
+
+    .sub-entry:first-of-type {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .sub-entry-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-main);
+    }
+
+    .sub-entry-detail {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+
+    .address-line {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--ink-muted);
+      background: var(--bg-paper);
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--border-soft);
+      word-break: break-all;
+    }
+
     .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 9px;
     }
 
     .btn {
@@ -306,8 +416,8 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      padding: 9px 12px;
-      min-height: 40px;
+      padding: 8px 12px;
+      min-height: 38px;
       border-radius: var(--radius-sm);
       font-size: 12.5px;
       font-weight: 700;
@@ -316,11 +426,6 @@
       background: #fff;
       color: var(--ink-main);
       cursor: pointer;
-      transition: background-color 0.14s ease, border-color 0.14s ease;
-    }
-
-    .btn:active {
-      transform: scale(0.99);
     }
 
     .btn:hover {
@@ -344,261 +449,7 @@
       border-color: #1d3b2b;
     }
 
-    .address-line {
-      margin-top: 8px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: var(--ink-muted);
-      background: var(--bg-paper);
-      padding: 7px 10px;
-      border-radius: var(--radius-sm);
-      border: 1px dashed var(--border-soft);
-      word-break: break-all;
-    }
-
-    .day-tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 14px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .day-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .day-tab {
-      flex: 0 0 auto;
-      padding: 8px 13px;
-      min-height: 38px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: var(--bg-sub);
-      color: var(--ink-main);
-      font-weight: 700;
-      font-size: 12.5px;
-      cursor: pointer;
-    }
-
-    .day-tab.active {
-      background: var(--forest-deep);
-      color: #fffdf9;
-      border-color: var(--forest-deep);
-    }
-
-    .day-block {
-      margin-bottom: 20px;
-    }
-
-    .day-block[hidden] {
-      display: none;
-    }
-
-    .day-header {
-      background: linear-gradient(90deg, var(--forest-deep), var(--forest-mid));
-      color: #fffdf9;
-      padding: 11px 14px;
-      border-radius: var(--radius-md);
-      margin-bottom: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 5px;
-    }
-
-    .day-header h3 {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.35;
-    }
-
-    .day-spec {
-      font-size: 12px;
-      background: rgba(255, 255, 255, 0.18);
-      padding: 2px 9px;
-      border-radius: 999px;
-      font-weight: 700;
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 16px;
-      border-left: 2.5px solid var(--border-soft);
-      margin-left: 5px;
-    }
-
-    .tl-item {
-      position: relative;
-      background: #fff;
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 11px 12px;
-      margin-bottom: 10px;
-    }
-
-    .tl-item::before {
-      content: "";
-      position: absolute;
-      left: -22px;
-      top: 15px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--vermilion);
-      border: 2px solid #fffdf9;
-    }
-
-    .tl-time-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .tl-time {
-      font-weight: 800;
-      color: var(--vermilion);
-      font-size: 13.5px;
-    }
-
-    .tl-title {
-      font-weight: 700;
-      font-size: 14.5px;
-      line-height: 1.4;
-      color: var(--ink-main);
-    }
-
-    .tl-note {
-      margin: 5px 0 0;
-      font-size: 13px;
-      color: var(--ink-muted);
-    }
-
-    .route-stepper {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .route-stepper::-webkit-scrollbar {
-      display: none;
-    }
-
-    .route-node {
-      flex: 0 0 auto;
-      padding: 7px 11px;
-      min-height: 36px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: var(--bg-sub);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink-main);
-      cursor: pointer;
-    }
-
-    .route-node.active {
-      background: var(--vermilion);
-      color: #fff;
-      border-color: var(--vermilion);
-    }
-
-    .map-spot-tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .map-spot-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .spot-btn {
-      flex: 0 0 auto;
-      padding: 7px 11px;
-      min-height: 36px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-soft);
-      background: var(--bg-paper);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .spot-btn.active {
-      background: var(--forest-deep);
-      color: #fff;
-      border-color: var(--forest-deep);
-    }
-
-    .map-panel {
-      background: var(--bg-sub);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 12px;
-    }
-
-    .map-iframe-wrap {
-      position: relative;
-      width: 100%;
-      height: 260px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      background: #e6e2d8;
-      margin-top: 10px;
-    }
-
-    .map-iframe-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .spot-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .spot-card {
-      background: #fff;
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 12px 13px;
-    }
-
-    .spot-card h4 {
-      margin: 0 0 4px;
-      font-size: 14.5px;
-      line-height: 1.4;
-      color: var(--forest-deep);
-    }
-
-    .spot-meta {
-      font-size: 12.5px;
-      color: var(--ink-muted);
-      margin: 0 0 6px;
-    }
-
-    h3.sub-heading {
-      margin: 16px 0 6px;
-      font-size: 15px;
-      color: var(--forest-deep);
-    }
-
+    /* 持ち物チェックリスト */
     .gear-group {
       margin-bottom: 14px;
     }
@@ -653,10 +504,18 @@
       background: #fff;
     }
 
+    /* 日送りフッターナビ */
+    .day-switcher-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
     .toast {
       position: fixed;
       left: 50%;
-      bottom: 72px;
+      bottom: 24px;
       max-width: 90vw;
       transform: translateX(-50%) translateY(16px);
       background: var(--forest-deep);
@@ -678,40 +537,6 @@
     .toast.show {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
-    }
-
-    .bottom-bar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 40;
-      background: rgba(255, 253, 249, 0.97);
-      backdrop-filter: blur(8px);
-      border-top: 1px solid var(--border-soft);
-      display: flex;
-      justify-content: space-around;
-      padding: 5px 4px calc(5px + env(safe-area-inset-bottom, 0px));
-    }
-
-    .bottom-bar a {
-      text-decoration: none;
-      color: var(--ink-muted);
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2px;
-      min-height: 44px;
-      flex: 1;
-      border-radius: var(--radius-sm);
-    }
-
-    .bottom-bar a:hover {
-      color: var(--forest-deep);
-      background: var(--bg-sub);
     }
   </style>
 </head>
@@ -752,119 +577,127 @@
       </div>
       <h1 class="hero-title">熊野古道 中辺路 2泊3日ロングトレイル</h1>
       <p class="hero-subtitle">
-        世界遺産の古道と温泉キャンプを楽しむ、歩いて旅する熊野詣。高原の展望、古い石畳、杉林、数々の王子をめぐりながら熊野本宮大社を目指します。
+        世界遺産の古道と温泉キャンプを楽しむ、歩いて旅する熊野詣。日程タブを切り替えてその日の流れを確認できます。
       </p>
-
-      <div class="hero-meta-grid">
-        <div class="hero-meta-box">
-          <span class="hero-meta-label">開催日</span>
-          <span class="hero-meta-value">2026年11月21日〜23日 (土日祝)</span>
-        </div>
-        <div class="hero-meta-box">
-          <span class="hero-meta-label">前夜集合</span>
-          <span class="hero-meta-value">11/20(金) 20:00 東京モード学園 横</span>
-        </div>
-        <div class="hero-meta-box">
-          <span class="hero-meta-label">参加人数</span>
-          <span class="hero-meta-value">6名確定</span>
-        </div>
-      </div>
     </div>
   </header>
 
-  <nav class="top-nav" aria-label="セクションナビゲーション">
-    <div class="top-nav-inner">
-      <a class="nav-pill active" href="#overview">概要・注意</a>
-      <a class="nav-pill" href="#schedule">日程・時間</a>
-      <a class="nav-pill" href="#map">マップ</a>
-      <a class="nav-pill" href="#logistics">バス・湯・補給</a>
-      <a class="nav-pill" href="#gear">持ち物</a>
+  <nav class="top-nav" aria-label="日程ナビゲーション">
+    <div class="top-nav-inner" id="topNavTabs">
+      <button class="nav-tab active" type="button" data-view="overview">概要/持ち物</button>
+      <button class="nav-tab" type="button" data-view="day0">Day0(11/19)</button>
+      <button class="nav-tab" type="button" data-view="day1">Day1(11/20)</button>
+      <button class="nav-tab" type="button" data-view="day2">Day2(11/21)</button>
+      <button class="nav-tab" type="button" data-view="day3">Day3(11/22)</button>
     </div>
   </nav>
 
   <main class="container">
-    <!-- 1. 概要・注意事項 -->
-    <section class="card-section" id="overview">
-      <div class="section-head">
-        <h2 class="section-title">⛩️ コース概要・注意事項</h2>
-        <span class="section-sub">定員：6名確定</span>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span class="stat-label">歩行距離（目安）</span>
-          <span class="stat-val">約45km（約40km）</span>
+    <!-- 概要/持ち物 -->
+    <div class="view-panel" data-view-panel="overview">
+      <section class="card-section">
+        <div class="section-head">
+          <h2 class="section-title">⛩️ 概要・注意事項</h2>
+          <span class="section-sub">定員：6名（最大8名増員可／元枠表記：定員4名・車増発有りなら枠拡大）</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-label">累積標高差</span>
-          <span class="stat-val">約2,670m</span>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">歩行距離（目安）</span>
+            <span class="stat-val">約45km（約40km）</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">累積標高差</span>
+            <span class="stat-val">約2,670m</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">標準コースタイム</span>
+            <span class="stat-val">約20時間 (100%)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">体力度 / 難易度</span>
+            <span class="stat-val">★★★★★ / ★★☆☆☆</span>
+          </div>
         </div>
-        <div class="stat-card">
-          <span class="stat-label">標準コースタイム</span>
-          <span class="stat-val">約20時間 (100%)</span>
+
+        <div class="alert-box">
+          <strong>⚠️ 重要な運行・安全メモ</strong>
+          <ul style="margin:6px 0 0;padding-left:18px;">
+            <li><strong>長時間移動：</strong>レンタカーにて交代で運転を行います。車出し可能な方がいれば最大8名まで増員相談可。</li>
+            <li><strong>Day2のハード行程：</strong>約30km・12時間超の行動を予定。ただし<strong>バスにてエスケープ可能</strong>です。</li>
+            <li><strong>開催条件：</strong>テント泊装備で長時間歩ける方対象。悪天の場合は中止となる場合があります（キャンセル料あり）。</li>
+          </ul>
         </div>
-        <div class="stat-card">
-          <span class="stat-label">体力度 / 難易度</span>
-          <span class="stat-val">★★★★★ / ★★☆☆☆</span>
+
+        <div class="alert-box alert-box--info">
+          <strong>🗺️ 山行中の現在地確認：</strong>
+          山間部は電波が不安定になるため、登山道上の現在地・オフライン地図は <strong>YAMAPアプリ</strong> を併用してください。
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn--primary" href="https://yamap.com/plans/code/t2o6mDii6kLk6QPmPoU_D-7Nt1_N3Tan3Gtara6ZzwcI6acd-3Zx7EM6ZhC3v29BB9w?openExternalBrowser=1" target="_blank" rel="noopener">
+            🗺️ YAMAP 計画書
+          </a>
+          <a class="btn" href="https://m.youtube.com/watch?v=R8zsr1Loqvg&ra=m" target="_blank" rel="noopener">
+            ▶️ 参考動画
+          </a>
+          <a class="btn" href="https://www2.tb-kumano.jp/en/transport/pdf/Hongu-to-Tanabe-Shirahama-bus.pdf" target="_blank" rel="noopener">
+            🚌 龍神バス時刻表
+          </a>
+        </div>
+      </section>
+
+      <div class="ishidatami-divider" aria-hidden="true"></div>
+
+      <section class="card-section">
+        <div class="section-head">
+          <h2 class="section-title">🎒 持ち物チェックリスト</h2>
+          <span class="section-sub" id="gearProgress">0 / 0 完了</span>
+        </div>
+
+        <div class="gear-group">
+          <h3>【必須装備】</h3>
+          <div id="mustGearList"></div>
+        </div>
+
+        <div class="gear-group">
+          <h3>【推奨装備】</h3>
+          <div id="recGearList"></div>
+        </div>
+
+        <div class="gear-group">
+          <h3>【追加アイテム（端末保存）】</h3>
+          <div id="customGearList"></div>
+          <form class="add-gear-form" id="addGearForm">
+            <input type="text" id="customGearInput" placeholder="持ち物を追加（例：行動食、保険証）" aria-label="持ち物を追加" />
+            <button class="btn btn--primary" type="submit">＋ 追加</button>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- Day0(11/19) -->
+    <div class="view-panel" data-view-panel="day0" hidden>
+      <div class="day-banner">
+        <h2>Day0(11/19)｜車両受取＆新宿地上合流</h2>
+        <div class="day-banner-meta">
+          <span class="day-pill">レンタカー移動</span>
+          <span class="day-pill">ニコレン中野坂上 3泊4日 55,110円</span>
         </div>
       </div>
 
-      <div class="alert-box">
-        <strong>⚠️ 重要な運行・安全メモ</strong>
-        <ul style="margin:6px 0 0;padding-left:18px;">
-          <li><strong>長時間移動：</strong>レンタカーにて交代で運転を行います。</li>
-          <li><strong>DAY 2のハード行程：</strong>約30km・12時間超の行動を予定。ただし<strong>バスにてエスケープ可能</strong>です。</li>
-          <li><strong>開催条件：</strong>テント泊装備で長時間歩ける方対象。悪天の場合は中止となる場合があります（キャンセル料あり）。</li>
-        </ul>
-      </div>
-
-      <div class="btn-row">
-        <a class="btn btn--primary" href="https://yamap.com/plans/code/t2o6mDii6kLk6QPmPoU_D-7Nt1_N3Tan3Gtara6ZzwcI6acd-3Zx7EM6ZhC3v29BB9w?openExternalBrowser=1" target="_blank" rel="noopener">
-          🗺️ YAMAP 計画書
-        </a>
-        <a class="btn" href="https://m.youtube.com/watch?v=R8zsr1Loqvg&ra=m" target="_blank" rel="noopener">
-          ▶️ 参考動画
-        </a>
-        <a class="btn" href="https://www2.tb-kumano.jp/en/transport/pdf/Hongu-to-Tanabe-Shirahama-bus.pdf" target="_blank" rel="noopener">
-          🚌 龍神バス時刻表
-        </a>
-      </div>
-    </section>
-
-    <div class="ishidatami-divider" aria-hidden="true"></div>
-
-    <!-- 2. 日程・タイムライン -->
-    <section class="card-section" id="schedule">
-      <div class="section-head">
-        <h2 class="section-title">🗓️ 全体スケジュール</h2>
-        <span class="section-sub">住所コピー・Googleマップ起動対応</span>
-      </div>
-
-      <div class="day-tabs" role="tablist" aria-label="日程フィルター">
-        <button class="day-tab active" data-day="all" type="button">すべて</button>
-        <button class="day-tab" data-day="day0" type="button">DAY 0 (11/20 金)</button>
-        <button class="day-tab" data-day="day1" type="button">DAY 1 (11/21 土)</button>
-        <button class="day-tab" data-day="day2" type="button">DAY 2 (11/22 日)</button>
-        <button class="day-tab" data-day="day3" type="button">DAY 3 (11/23 月祝)</button>
-      </div>
-
-      <!-- DAY 0 -->
-      <div class="day-block" data-day-panel="day0">
-        <div class="day-header">
-          <h3>DAY 0｜11月20日(金) 車両受取＆新宿地上合流</h3>
-          <span class="day-spec">レンタカー移動</span>
-        </div>
+      <section class="card-section">
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-time-row">
               <span class="tl-time">19:30</span>
               <span class="tl-title">ニコニコレンタカー 中野坂上駅店</span>
             </div>
-            <p class="tl-note">車両受取・確認（3泊4日 55,110円）。運転免許証を忘れずに持参。</p>
+            <p class="tl-note">車両受取・確認。運転免許証を忘れずに持参。</p>
             <div class="address-line">📍 〒164-0012 東京都中野区本町２丁目４６−４</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒164-0012 東京都中野区本町２丁目４６−４">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -878,18 +711,24 @@
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒160-0023 東京都新宿区西新宿１丁目７−３">📋 住所コピー</button>
               <a class="btn" href="https://maps.app.goo.gl/Xz5Q8orjNSVQrFi96?g_st=ic" target="_blank" rel="noopener">🗺️ 集合マップ</a>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%A2%E3%83%BC%E3%83%89%E5%AD%A6%E5%9C%92%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF1-7-3" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%A2%E3%83%BC%E3%83%89%E5%AD%A6%E5%9C%92%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF1-7-3" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
         </div>
+      </section>
+    </div>
+
+    <!-- Day1(11/20) -->
+    <div class="view-panel" data-view-panel="day1" hidden>
+      <div class="day-banner">
+        <h2>Day1(11/20)｜滝尻〜高原霧の里〜近露</h2>
+        <div class="day-banner-meta">
+          <span class="day-pill">14.1km / 1,170m / 7h</span>
+          <span class="day-pill">宿泊：アイリスパーク</span>
+        </div>
       </div>
 
-      <!-- DAY 1 -->
-      <div class="day-block" data-day-panel="day1">
-        <div class="day-header">
-          <h3>DAY 1｜11月21日(土) 滝尻〜高原霧の里〜近露</h3>
-          <span class="day-spec">14.1km / 1,170m / 7h</span>
-        </div>
+      <section class="card-section">
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-time-row">
@@ -900,7 +739,7 @@
             <div class="address-line">📍 和歌山県田辺市本宮町本宮 熊野本宮大社 河川敷駐車場</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="和歌山県田辺市本宮町本宮 熊野本宮大社 河川敷駐車場">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E6%B2%B3%E5%B7%9D%E6%95%B7%E5%8B%99%E8%BB%92%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E6%B2%B3%E5%B7%9D%E6%95%B7%E5%8B%99%E8%BB%92%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -924,7 +763,7 @@
             <div class="address-line">📍 〒646-1411 和歌山県田辺市中辺路町滝尻</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒646-1411 和歌山県田辺市中辺路町滝尻">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E6%BB%9D%E5%B0%BB%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E6%BB%9D%E5%B0%BB" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E6%BB%9D%E5%B0%BB%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E6%BB%9D%E5%B0%BB" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -937,7 +776,7 @@
             <div class="address-line">📍 〒646-1415 和歌山県田辺市中辺路町高原</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒646-1415 和歌山県田辺市中辺路町高原">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E9%AB%98%E5%8E%9F%E9%9C%AE%E3%81%AE%E9%87%8C%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E9%AB%98%E5%8E%9F" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E9%AB%98%E5%8E%9F%E9%9C%AE%E3%81%AE%E9%87%8C%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E9%AB%98%E5%8E%9F" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -946,12 +785,31 @@
               <span class="tl-time">13:35</span>
               <span class="tl-title">道の駅 熊野古道中辺路 🚻</span>
             </div>
-            <p class="tl-note">近露エリアの休憩・補給拠点。周辺にスーパー・売店あり。</p>
+            <p class="tl-note">近露エリアの休憩・補給拠点（道中には殆ど無く、近露周辺に集中）。</p>
             <div class="address-line">📍 〒646-1402 和歌山県田辺市中辺路町近露1017-1</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露1017-1">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E4%B8%AD%E8%BE%BA%E8%B7%AF%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B21017-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-              <a class="btn" href="#logistics">🛒 補給一覧</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E4%B8%AD%E8%BE%BA%E8%B7%AF%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B21017-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">🛒 近露〜栗栖川周辺の補給ポイント</div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">Ａコープ 熊野古道ちかつゆ店</div>
+                <div class="sub-entry-detail">8:30〜18:00／〒646-1402 和歌山県田辺市中辺路町近露1794-1</div>
+                <div class="btn-row">
+                  <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露1794-1">📋 住所コピー</button>
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%EF%BC%A1%E3%82%B3%E3%83%BC%E3%83%97%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E3%81%A1%E3%81%8B%E3%81%A4%E3%82%86%E5%BA%97%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B21794-1" target="_blank" rel="noopener">🗺️ マップ</a>
+                </div>
+              </div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">古道歩きの里／近露Pon／Ａコープ 熊野古道なかへち</div>
+                <div class="sub-entry-detail">古道歩きの里：〒646-1402 近露1810-1（9:00-17:00・火曜定休）／近露Pon：〒646-1402 近露1026-1／Ａコープ なかへち：〒646-1421 栗栖川358-2（9:00-19:00）</div>
+                <div class="btn-row">
+                  <button class="btn btn--copy" type="button" data-copy="〒646-1421 和歌山県田辺市中辺路町栗栖川358-2">📋 なかへちコピー</button>
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%EF%BC%A1%E3%82%B3%E3%83%BC%E3%83%97%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E3%81%AA%E3%81%8B%E3%81%B8%E3%81%A1%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E6%A0%97%E6%A0%96%E5%B7%9D358-2" target="_blank" rel="noopener">🗺️ なかへちマップ</a>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -966,18 +824,25 @@
               <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露414-1">📋 住所コピー</button>
               <a class="btn" href="https://irispark.jp" target="_blank" rel="noopener">🌐 公式サイト</a>
               <a class="btn" href="tel:0739-65-0410">📞 電話</a>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%83%BC%E3%83%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B2414-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%83%BC%E3%83%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B2414-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
         </div>
+      </section>
+    </div>
+
+    <!-- Day2(11/21) -->
+    <div class="view-panel" data-view-panel="day2" hidden>
+      <div class="day-banner">
+        <h2>Day2(11/21)｜近露〜発心門王子〜本宮大社〜川湯</h2>
+        <div class="day-banner-meta">
+          <span class="day-pill">30km / 1,520m / 12.5h</span>
+          <span class="day-pill">バスエスケープ可</span>
+          <span class="day-pill">宿泊：川湯キャンプ場</span>
+        </div>
       </div>
 
-      <!-- DAY 2 -->
-      <div class="day-block" data-day-panel="day2">
-        <div class="day-header">
-          <h3>DAY 2｜11月22日(日) 近露〜発心門王子〜本宮大社〜川湯</h3>
-          <span class="day-spec">30km / 1,520m / 12.5h</span>
-        </div>
+      <section class="card-section">
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-time-row">
@@ -988,7 +853,19 @@
             <div class="address-line">📍 〒646-1402 和歌山県田辺市中辺路町近露414-1</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露414-1">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%83%BC%E3%83%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B2414-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%83%BC%E3%83%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B2414-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">🚌 序盤〜短縮用のバスエスケープ目安</div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">① 古道歩きの里ちかつゆ〜熊野大社前(乗換)〜発心門王子</div>
+                <div class="sub-entry-detail">アイリスパークより徒歩25分〜途中短縮ルート（30km→12kmに短縮可能）</div>
+              </div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">② 古道歩きの里ちかつゆ〜請川バス停</div>
+                <div class="sub-entry-detail">アイリスパークより徒歩25分〜川湯キャンプ場方面へのエスケープ動線</div>
+              </div>
             </div>
           </div>
 
@@ -1001,7 +878,7 @@
             <div class="address-line">📍 〒646-1403 和歌山県田辺市中辺路町野中</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒646-1403 和歌山県田辺市中辺路町野中">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E9%87%8E%E4%B8%AD%E3%81%AE%E6%B8%85%E6%B0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E9%87%8E%E4%B8%AD" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E9%87%8E%E4%B8%AD%E3%81%AE%E6%B8%85%E6%B0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E9%87%8E%E4%B8%AD" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1010,12 +887,19 @@
               <span class="tl-time">11:35</span>
               <span class="tl-title">発心門王子 🚻</span>
             </div>
-            <p class="tl-note">本宮大社まで残り約7km。バスエスケープの分岐点。</p>
+            <p class="tl-note">本宮大社まで残り約7km。途中リタイア用のエスケープポイント。</p>
             <div class="address-line">📍 〒647-1716 和歌山県田辺市本宮町三里</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒647-1716 和歌山県田辺市本宮町三里 発心門王子">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BA%E5%BF%83%E9%96%80%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E4%B8%89%E9%87%8C" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-              <a class="btn" href="#logistics">🚌 エスケープ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BA%E5%BF%83%E9%96%80%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E4%B8%89%E9%87%8C" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">🚌 途中リタイア用エスケープ</div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">③ 発心門王子〜請川バス停</div>
+                <div class="sub-entry-detail">途中リタイア用〜川湯キャンプ場方面へのバス移動</div>
+              </div>
             </div>
           </div>
 
@@ -1028,7 +912,7 @@
             <div class="address-line">📍 〒647-1717 和歌山県田辺市本宮町伏拝124-1</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒647-1717 和歌山県田辺市本宮町伏拝124-1">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E3%81%BB%E3%82%93%E3%81%90%E3%81%86%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E4%BC%8F%E6%8B%9D124-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E3%81%BB%E3%82%93%E3%81%90%E3%81%86%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E4%BC%8F%E6%8B%9D124-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1041,7 +925,27 @@
             <div class="address-line">📍 〒647-1731 和歌山県田辺市本宮町本宮1110</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒647-1731 和歌山県田辺市本宮町本宮1110">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%9C%AC%E5%AE%AE1110" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%9C%AC%E5%AE%AE1110" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">🛒 熊野本宮大社周辺の補給ポイント（その他周辺に飲食店あり）</div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">Ｙショップ ヤマザキ本宮小野商店</div>
+                <div class="sub-entry-detail">7:30〜19:00／和歌山県田辺市本宮町本宮</div>
+                <div class="btn-row">
+                  <button class="btn btn--copy" type="button" data-copy="和歌山県田辺市本宮町本宮 ヤマザキ本宮小野商店">📋 住所コピー</button>
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%83%A4%E3%83%9E%E3%82%B6%E3%82%AD%E6%9C%AC%E5%AE%AE%E5%B0%8F%E9%87%8E%E5%95%86%E5%BA%97%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ マップ</a>
+                </div>
+              </div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">八屋（スーパー）</div>
+                <div class="sub-entry-detail">9:30〜18:30（水曜定休）／〒647-1731 和歌山県田辺市本宮町本宮471-1</div>
+                <div class="btn-row">
+                  <button class="btn btn--copy" type="button" data-copy="〒647-1731 和歌山県田辺市本宮町本宮471-1">📋 住所コピー</button>
+                  <a class="btn" href="https://maps.app.goo.gl/uM3jrdosn62LSFZW7?g_st=ic" target="_blank" rel="noopener">🗺️ マップ</a>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1054,7 +958,7 @@
             <div class="address-line">📍 和歌山県田辺市本宮町本宮 熊野本宮大社 河川敷駐車場</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="和歌山県田辺市本宮町本宮 熊野本宮大社 河川敷駐車場">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E6%B2%B3%E5%B7%9D%E6%95%B7%E5%8B%99%E8%BB%92%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E6%B2%B3%E5%B7%9D%E6%95%B7%E5%8B%99%E8%BB%92%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1063,24 +967,50 @@
               <span class="tl-time">16:15</span>
               <span class="tl-title">田辺川湯キャンプ場（当日受付）＆ 温泉？</span>
             </div>
-            <p class="tl-note">当日受付（0735-42-1168）。周辺温泉：つぼ湯、わたらせ温泉。</p>
+            <p class="tl-note">当日受付（0735-42-1168）。</p>
             <div class="address-line">📍 〒647-1732 和歌山県田辺市本宮町川湯1452</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒647-1732 和歌山県田辺市本宮町川湯1452">📋 住所コピー</button>
               <a class="btn" href="https://tanabe-kawayu-camp.com" target="_blank" rel="noopener">🌐 公式サイト</a>
               <a class="btn" href="tel:0735-42-1168">📞 電話</a>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E8%BE%BA%E5%B7%9D%E6%B9%AF%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E8%BE%BA%E5%B7%9D%E6%B9%AF%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">♨️ 近隣の温泉</div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">つぼ湯（AM 6:00〜21:00）</div>
+                <div class="sub-entry-detail">〒647-1733 和歌山県田辺市本宮町湯峰110</div>
+                <div class="btn-row">
+                  <button class="btn btn--copy" type="button" data-copy="〒647-1733 和歌山県田辺市本宮町湯峰110">📋 住所コピー</button>
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%81%A4%E3%81%BC%E6%B9%AF%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%B9%AF%E5%B3%B0110" target="_blank" rel="noopener">🗺️ マップ</a>
+                </div>
+              </div>
+              <div class="sub-entry">
+                <div class="sub-entry-name">わたらせ温泉 大露天風呂（AM 6:00〜21:30）</div>
+                <div class="sub-entry-detail">〒647-1732 和歌山県田辺市本宮町川湯1452</div>
+                <div class="btn-row">
+                  <button class="btn btn--copy" type="button" data-copy="〒647-1732 和歌山県田辺市本宮町川湯1452">📋 住所コピー</button>
+                  <a class="btn" href="https://www.watarase-onsen.jp/" target="_blank" rel="noopener">🌐 公式サイト</a>
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%8F%E3%81%9F%E3%82%89%E3%81%9B%E6%B8%A9%E6%B3%89%20%E5%A4%A7%E9%9C%B2%E5%A4%A9%E9%A2%A8%E5%91%82%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452" target="_blank" rel="noopener">🗺️ マップ</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+    </div>
+
+    <!-- Day3(11/22) -->
+    <div class="view-panel" data-view-panel="day3" hidden>
+      <div class="day-banner">
+        <h2>Day3(11/22)｜川湯発〜伊勢神宮〜帰京・返却</h2>
+        <div class="day-banner-meta">
+          <span class="day-pill">観光・帰路・レンタカー返却</span>
+        </div>
       </div>
 
-      <!-- DAY 3 -->
-      <div class="day-block" data-day-panel="day3">
-        <div class="day-header">
-          <h3>DAY 3｜11月23日(月祝) 川湯発〜伊勢神宮〜帰京・返却</h3>
-          <span class="day-spec">観光・帰路・返却</span>
-        </div>
+      <section class="card-section">
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-time-row">
@@ -1091,7 +1021,7 @@
             <div class="address-line">📍 〒647-1732 和歌山県田辺市本宮町川湯1452</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒647-1732 和歌山県田辺市本宮町川湯1452">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E8%BE%BA%E5%B7%9D%E6%B9%AF%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E8%BE%BA%E5%B7%9D%E6%B9%AF%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1105,7 +1035,7 @@
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒516-0023 三重県伊勢市宇治館町1">📋 住所コピー</button>
               <a class="btn" href="https://www.isejingu.or.jp/visit/course/" target="_blank" rel="noopener">🌐 参拝案内</a>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E4%BC%8A%E5%8B%A2%E7%A5%9E%E5%AE%AE%20%E5%86%85%E5%AE%AE%20%E4%BC%8A%E5%8B%A2%E5%B8%82%E5%AE%87%E6%B2%BB%E9%A4%A8%E7%94%BA1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E4%BC%8A%E5%8B%A2%E7%A5%9E%E5%AE%AE%20%E5%86%85%E5%AE%AE%20%E4%BC%8A%E5%8B%A2%E5%B8%82%E5%AE%87%E6%B2%BB%E9%A4%A8%E7%94%BA1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1127,7 +1057,7 @@
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒220-0011 神奈川県横浜市西区高島２丁目１６−１">📋 住所コピー</button>
               <a class="btn" href="https://maps.app.goo.gl/WUwvLxUfoxzazwsY6?g_st=ic" target="_blank" rel="noopener">🗺️ 降車マップ</a>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E6%A8%AA%E6%B5%9C%E9%A7%85%20%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E8%A5%BF%E5%8C%BA%E9%AB%98%E5%B3%B62-16-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E6%A8%AA%E6%B5%9C%E9%A7%85%20%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E8%A5%BF%E5%8C%BA%E9%AB%98%E5%B3%B62-16-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1140,7 +1070,7 @@
             <div class="address-line">📍 〒160-0022 東京都新宿区新宿３丁目３８−１</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒160-0022 東京都新宿区新宿３丁目３８−１">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%AE%BF%E9%A7%85%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E6%96%B0%E5%AE%BF3-38-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%AE%BF%E9%A7%85%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E6%96%B0%E5%AE%BF3-38-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -1153,219 +1083,17 @@
             <div class="address-line">📍 〒164-0012 東京都中野区本町２丁目４６−４</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒164-0012 東京都中野区本町２丁目４６−４">📋 住所コピー</button>
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%BD%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <div class="ishidatami-divider" aria-hidden="true"></div>
-
-    <!-- 3. コース・マップ -->
-    <section class="card-section" id="map">
-      <div class="section-head">
-        <h2 class="section-title">🗺️ コース・マップ</h2>
-        <span class="section-sub">山行中の現在地確認はYAMAPアプリ推奨</span>
-      </div>
-
-      <div class="alert-box alert-box--info">
-        山間部は電波が不安定になることがあります。登山道上の現在地・標高・オフライン地図は <strong>YAMAPアプリ</strong> を併用し、本マップは拠点確認やGoogleマップ起動にご活用ください。
-      </div>
-
-      <div class="route-stepper" aria-label="縦走ルート進行バー">
-        <button class="route-node active" type="button" data-spot="takijiri">① 滝尻</button>
-        <button class="route-node" type="button" data-spot="kiri">② 高原霧の里</button>
-        <button class="route-node" type="button" data-spot="iris">③ アイリスパーク</button>
-        <button class="route-node" type="button" data-spot="hosshinmon">④ 発心門王子</button>
-        <button class="route-node" type="button" data-spot="hongu">⑤ 熊野本宮大社</button>
-        <button class="route-node" type="button" data-spot="kawayu">⑥ 川湯</button>
-      </div>
-
-      <div class="map-spot-tabs" aria-label="主要拠点選択">
-        <button class="spot-btn active" type="button" data-spot="takijiri">滝尻王子</button>
-        <button class="spot-btn" type="button" data-spot="kiri">高原霧の里</button>
-        <button class="spot-btn" type="button" data-spot="iris">アイリスパーク</button>
-        <button class="spot-btn" type="button" data-spot="hosshinmon">発心門王子</button>
-        <button class="spot-btn" type="button" data-spot="hongu">熊野本宮大社</button>
-        <button class="spot-btn" type="button" data-spot="kawayu">川湯キャンプ場</button>
-        <button class="spot-btn" type="button" data-spot="ise">伊勢神宮</button>
-        <button class="spot-btn" type="button" data-spot="mode">東京モード学園</button>
-      </div>
-
-      <div class="map-panel" id="mapPanel">
-        <strong id="spotTitle" style="font-size:15.5px;color:var(--forest-deep);">滝尻王子（DAY1 スタート地点）</strong>
-        <div id="spotAddr" class="address-line">📍 〒646-1411 和歌山県田辺市中辺路町滝尻</div>
-        <p id="spotMemo" class="tl-note">07:12 バス下車後に歩き始める中辺路の玄関口。</p>
-        <div class="btn-row">
-          <button class="btn btn--copy" id="spotCopyBtn" type="button" data-copy="〒646-1411 和歌山県田辺市中辺路町滝尻">📋 住所コピー</button>
-          <a class="btn btn--primary" id="spotMapLink" href="https://www.google.com/maps/search/?api=1&query=%E6%BB%9D%E5%B0%BB%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E6%BB%9D%E5%B0%BB" target="_blank" rel="noopener">🗺️ Googleマップで開く</a>
-        </div>
-        <div class="map-iframe-wrap">
-          <iframe id="mapFrame" title="拠点マップ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%E6%BB%9D%E5%B0%BB%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82&output=embed"></iframe>
-        </div>
-      </div>
-    </section>
-
-    <div class="ishidatami-divider" aria-hidden="true"></div>
-
-    <!-- 4. エスケープ・温泉・補給 -->
-    <section class="card-section" id="logistics">
-      <div class="section-head">
-        <h2 class="section-title">🚌 エスケープ・♨️ 温泉・🛒 補給</h2>
-        <span class="section-sub">近露＆本宮エリア情報</span>
-      </div>
-
-      <h3 class="sub-heading">🚌 DAY 2 エスケープポイント（バス停）</h3>
-      <div class="spot-grid">
-        <div class="spot-card">
-          <h4>① 古道歩きの里ちかつゆ〜熊野大社前(乗換)〜発心門王子</h4>
-          <p class="spot-meta">アイリスパークより徒歩25分〜途中短縮ルート（30km→12kmに短縮可能）</p>
-          <div class="address-line">📍 古道歩きの里：〒646-1402 和歌山県田辺市中辺路町近露1810-1</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露1810-1">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E9%81%93%E6%AD%A9%E3%81%8D%E3%81%AE%E9%87%8C%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B21810-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>② 古道歩きの里ちかつゆ〜請川バス停</h4>
-          <p class="spot-meta">アイリスパークより徒歩25分〜川湯キャンプ場方面へのエスケープ動線</p>
-          <div class="address-line">📍 請川バス停周辺：和歌山県田辺市本宮町請川</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="和歌山県田辺市本宮町請川">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E8%AB%8B%E5%B7%9D%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E8%AB%8B%E5%B7%9D" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>③ 発心門王子〜請川バス停</h4>
-          <p class="spot-meta">DAY 2 途中リタイア用〜川湯キャンプ場方面へのバス移動</p>
-          <div class="address-line">📍 発心門王子：〒647-1716 和歌山県田辺市本宮町三里</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒647-1716 和歌山県田辺市本宮町三里 発心門王子">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BA%E5%BF%83%E9%96%80%E7%8E%8B%E5%AD%90%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E4%B8%89%E9%87%8C" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="sub-heading">♨️ 温泉</h3>
-      <div class="spot-grid">
-        <div class="spot-card">
-          <h4>♨️ つぼ湯</h4>
-          <p class="spot-meta">営業時間：AM 6:00 〜 21:00</p>
-          <div class="address-line">📍 〒647-1733 和歌山県田辺市本宮町湯峰110</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒647-1733 和歌山県田辺市本宮町湯峰110">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%81%A4%E3%81%BC%E6%B9%AF%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%B9%AF%E5%B3%B0110" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>♨️ わたらせ温泉 大露天風呂</h4>
-          <p class="spot-meta">営業時間：AM 6:00 〜 21:30</p>
-          <div class="address-line">📍 〒647-1732 和歌山県田辺市本宮町川湯1452</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒647-1732 和歌山県田辺市本宮町川湯1452">📋 住所コピー</button>
-            <a class="btn" href="https://www.watarase-onsen.jp/" target="_blank" rel="noopener">🌐 公式サイト</a>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%8F%E3%81%9F%E3%82%89%E3%81%9B%E6%B8%A9%E6%B3%89%20%E5%A4%A7%E9%9C%B2%E5%A4%A9%E9%A2%A8%E5%91%82%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="sub-heading">🛒 補給ポイント（道中には殆ど無し・宿泊地＆本宮周辺に集中）</h3>
-      <div class="spot-grid">
-        <div class="spot-card">
-          <h4>［近露］① 道の駅 熊野古道中辺路</h4>
-          <p class="spot-meta">1日目ゴール付近の休憩・補給拠点</p>
-          <div class="address-line">📍 〒646-1402 和歌山県田辺市中辺路町近露1017-1</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露1017-1">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E9%81%93%E3%81%AE%E9%A7%85%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E4%B8%AD%E8%BE%BA%E8%B7%AF%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B21017-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>［近露］② Ａコープ 熊野古道ちかつゆ店</h4>
-          <p class="spot-meta">営業時間：8:30〜18:00／1日目近露周辺の食料・飲料補給</p>
-          <div class="address-line">📍 〒646-1402 和歌山県田辺市中辺路町近露1794-1</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露1794-1">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%EF%BC%A1%E3%82%B3%E3%83%BC%E3%83%97%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E3%81%A1%E3%81%8B%E3%81%A4%E3%82%86%E5%BA%97%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B21794-1" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>［近露］古道歩きの里／近露Pon／Ａコープ なかへち</h4>
-          <p class="spot-meta">1日目近露〜栗栖川エリアの立ち寄り・補給スポット</p>
-          <div class="address-line">📍 古道歩きの里：〒646-1402 和歌山県田辺市中辺路町近露1810-1（9:00-17:00・火曜定休）<br>📍 近露Pon：〒646-1402 和歌山県田辺市中辺路町近露1026-1<br>📍 Ａコープ なかへち：〒646-1421 和歌山県田辺市中辺路町栗栖川358-2（9:00-19:00）</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒646-1421 和歌山県田辺市中辺路町栗栖川358-2">📋 なかへちコピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%EF%BC%A1%E3%82%B3%E3%83%BC%E3%83%97%20%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E3%81%AA%E3%81%8B%E3%81%B8%E3%81%A1%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E6%A0%97%E6%A0%96%E5%B7%9D358-2" target="_blank" rel="noopener">🗺️ なかへちマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>［本宮大社周辺］③ Ｙショップ ヤマザキ本宮小野商店</h4>
-          <p class="spot-meta">営業時間：7:30〜19:00／熊野本宮大社周辺の補給処</p>
-          <div class="address-line">📍 和歌山県田辺市本宮町本宮（ヤマザキ本宮小野商店）</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="和歌山県田辺市本宮町本宮 ヤマザキ本宮小野商店">📋 住所コピー</button>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%83%A4%E3%83%9E%E3%82%B6%E3%82%AD%E6%9C%AC%E5%AE%AE%E5%B0%8F%E9%87%8E%E5%95%86%E5%BA%97%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ Googleマップ</a>
-          </div>
-        </div>
-
-        <div class="spot-card">
-          <h4>［本宮大社周辺］④ 八屋（スーパー）</h4>
-          <p class="spot-meta">営業時間：9:30〜18:30（水曜定休）／本宮大社周辺のスーパー（その他周辺に飲食店あり）</p>
-          <div class="address-line">📍 〒647-1731 和歌山県田辺市本宮町本宮471-1</div>
-          <div class="btn-row">
-            <button class="btn btn--copy" type="button" data-copy="〒647-1731 和歌山県田辺市本宮町本宮471-1">📋 住所コピー</button>
-            <a class="btn" href="https://maps.app.goo.gl/uM3jrdosn62LSFZW7?g_st=ic" target="_blank" rel="noopener">🗺️ 八屋マップ</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="ishidatami-divider" aria-hidden="true"></div>
-
-    <!-- 5. 持ち物チェックリスト -->
-    <section class="card-section" id="gear">
-      <div class="section-head">
-        <h2 class="section-title">🎒 持ち物チェックリスト</h2>
-        <span class="section-sub" id="gearProgress">0 / 0 完了</span>
-      </div>
-
-      <div class="gear-group">
-        <h3>【必須装備】</h3>
-        <div id="mustGearList"></div>
-      </div>
-
-      <div class="gear-group">
-        <h3>【推奨装備】</h3>
-        <div id="recGearList"></div>
-      </div>
-
-      <div class="gear-group">
-        <h3>【追加アイテム（端末保存）】</h3>
-        <div id="customGearList"></div>
-        <form class="add-gear-form" id="addGearForm">
-          <input type="text" id="customGearInput" placeholder="持ち物を追加（例：行動食、保険証）" aria-label="持ち物を追加" />
-          <button class="btn btn--primary" type="submit">＋ 追加</button>
-        </form>
-      </div>
-    </section>
+    <div class="day-switcher-footer" id="dayPager"></div>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite">コピーしました</div>
-
-  <footer class="bottom-bar" aria-label="クイック移動">
-    <a href="#overview"><span>⛩️</span><span>概要</span></a>
-    <a href="#schedule"><span>🗓️</span><span>日程</span></a>
-    <a href="#map"><span>🗺️</span><span>マップ</span></a>
-    <a href="#logistics"><span>🛒</span><span>補給・湯</span></a>
-    <a href="#gear"><span>🎒</span><span>持ち物</span></a>
-  </footer>
 
   <script>
     (function () {
@@ -1417,101 +1145,59 @@
         }
       });
 
-      const dayTabs = document.querySelectorAll(".day-tab");
-      const dayPanels = document.querySelectorAll(".day-block");
-      dayTabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const target = tab.dataset.day;
-          dayTabs.forEach((t) => t.classList.toggle("active", t === tab));
-          dayPanels.forEach((panel) => {
-            if (target === "all") {
-              panel.hidden = false;
-            } else {
-              panel.hidden = panel.dataset.dayPanel !== target;
-            }
-          });
-        });
-      });
+      const viewOrder = [
+        { key: "overview", label: "概要/持ち物" },
+        { key: "day0", label: "Day0(11/19)" },
+        { key: "day1", label: "Day1(11/20)" },
+        { key: "day2", label: "Day2(11/21)" },
+        { key: "day3", label: "Day3(11/22)" }
+      ];
 
-      const spots = {
-        takijiri: {
-          title: "滝尻王子（DAY1 スタート地点）",
-          addr: "〒646-1411 和歌山県田辺市中辺路町滝尻",
-          memo: "07:12 バス下車後に歩き始める中辺路の玄関口。",
-          query: "滝尻王子 田辺市中辺路町滝尻"
-        },
-        kiri: {
-          title: "高原霧の里駐車場 🚻",
-          addr: "〒646-1415 和歌山県田辺市中辺路町高原",
-          memo: "DAY1 09:35 目安。高原の展望とトイレ休憩。",
-          query: "高原霧の里 田辺市中辺路町高原"
-        },
-        iris: {
-          title: "アイリスパークオートキャンプ場（DAY1 宿泊）",
-          addr: "〒646-1402 和歌山県田辺市中辺路町近露414-1",
-          memo: "予約済 ✅ 6人 2,300円/人（0739-65-0410）。DAY2 は 04:00 出発。",
-          query: "アイリスパークオートキャンプ場 田辺市中辺路町近露414-1"
-        },
-        hosshinmon: {
-          title: "発心門王子 🚻（DAY2 中盤・エスケープ分岐）",
-          addr: "〒647-1716 和歌山県田辺市本宮町三里",
-          memo: "DAY2 11:35 目安。本宮大社まで残り約7km。バスエスケープの確認ポイント。",
-          query: "発心門王子 田辺市本宮町三里"
-        },
-        hongu: {
-          title: "熊野本宮大社・河川敷駐車場（DAY2 ゴール・車回収）",
-          addr: "〒647-1731 和歌山県田辺市本宮町本宮1110",
-          memo: "DAY2 14:45 ゴール、15:00 河川敷駐車場で車回収。",
-          query: "熊野本宮大社 田辺市本宮町本宮1110"
-        },
-        kawayu: {
-          title: "田辺川湯キャンプ場（DAY2 宿泊・温泉エリア）",
-          addr: "〒647-1732 和歌山県田辺市本宮町川湯1452",
-          memo: "DAY2 16:15 当日受付（0735-42-1168）。つぼ湯・わたらせ温泉も近隣。",
-          query: "田辺川湯キャンプ場 田辺市本宮町川湯1452"
-        },
-        ise: {
-          title: "伊勢神宮（DAY3 観光）",
-          addr: "〒516-0023 三重県伊勢市宇治館町1",
-          memo: "DAY3 09:00 到着〜12:00 出発予定。",
-          query: "伊勢神宮 内宮 伊勢市宇治館町1"
-        },
-        mode: {
-          title: "東京モード学園 横（DAY0 20:00 地上合流）",
-          addr: "〒160-0023 東京都新宿区西新宿１丁目７−３",
-          memo: "19:30 ニコレン中野坂上受取後、20:00 東京モード学園 横の地上側歩道沿いで合流。",
-          query: "東京モード学園 新宿区西新宿1-7-3"
+      const navTabs = document.querySelectorAll(".nav-tab");
+      const viewPanels = document.querySelectorAll(".view-panel");
+      const pagerEl = document.getElementById("dayPager");
+
+      function renderPager(currentKey) {
+        const idx = viewOrder.findIndex((v) => v.key === currentKey);
+        const prev = idx > 0 ? viewOrder[idx - 1] : null;
+        const next = idx >= 0 && idx < viewOrder.length - 1 ? viewOrder[idx + 1] : null;
+        pagerEl.innerHTML = "";
+
+        if (prev) {
+          const prevBtn = document.createElement("button");
+          prevBtn.type = "button";
+          prevBtn.className = "btn";
+          prevBtn.style.flex = "1";
+          prevBtn.textContent = "← " + prev.label;
+          prevBtn.addEventListener("click", () => switchView(prev.key));
+          pagerEl.appendChild(prevBtn);
         }
-      };
-
-      const spotTitle = document.getElementById("spotTitle");
-      const spotAddr = document.getElementById("spotAddr");
-      const spotMemo = document.getElementById("spotMemo");
-      const spotCopyBtn = document.getElementById("spotCopyBtn");
-      const spotMapLink = document.getElementById("spotMapLink");
-      const mapFrame = document.getElementById("mapFrame");
-      const spotBtns = document.querySelectorAll(".spot-btn");
-      const routeNodes = document.querySelectorAll(".route-node");
-
-      function selectSpot(key) {
-        const data = spots[key];
-        if (!data) return;
-        spotTitle.textContent = data.title;
-        spotAddr.textContent = "📍 " + data.addr;
-        spotMemo.textContent = data.memo;
-        spotCopyBtn.dataset.copy = data.addr;
-        spotCopyBtn.textContent = "📋 住所コピー";
-        const encoded = encodeURIComponent(data.query);
-        spotMapLink.href = "https://www.google.com/maps/search/?api=1&query=" + encoded;
-        mapFrame.src = "https://www.google.com/maps?q=" + encoded + "&output=embed";
-
-        spotBtns.forEach((b) => b.classList.toggle("active", b.dataset.spot === key));
-        routeNodes.forEach((n) => n.classList.toggle("active", n.dataset.spot === key));
+        if (next) {
+          const nextBtn = document.createElement("button");
+          nextBtn.type = "button";
+          nextBtn.className = "btn btn--primary";
+          nextBtn.style.flex = "1";
+          nextBtn.textContent = next.label + " →";
+          nextBtn.addEventListener("click", () => switchView(next.key));
+          pagerEl.appendChild(nextBtn);
+        }
       }
 
-      spotBtns.forEach((b) => b.addEventListener("click", () => selectSpot(b.dataset.spot)));
-      routeNodes.forEach((n) => n.addEventListener("click", () => selectSpot(n.dataset.spot)));
+      function switchView(key) {
+        navTabs.forEach((t) => t.classList.toggle("active", t.dataset.view === key));
+        viewPanels.forEach((p) => {
+          p.hidden = p.dataset.viewPanel !== key;
+        });
+        renderPager(key);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
 
+      navTabs.forEach((tab) => {
+        tab.addEventListener("click", () => switchView(tab.dataset.view));
+      });
+      renderPager("overview");
+
+      // 持ち物チェックリスト（端末保存）
       const STORAGE_KEY = "kumano_kodo_2026_gear_v3";
       const mustItems = [
         "運転免許証（レンタカー・交代運転手用）",
