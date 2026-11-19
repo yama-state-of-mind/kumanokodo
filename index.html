@@ -20,6 +20,47 @@
       --radius-lg: 16px;
       --radius-md: 12px;
       --radius-sm: 10px;
+
+      /* ビュー別テーマカラー（デフォルト：概要/持ち物＝深緑） */
+      --theme-primary: #1d3b2b;
+      --theme-secondary: #2f5942;
+      --theme-soft-bg: #eef4f0;
+      --theme-soft-border: #c5d6cc;
+    }
+
+    body[data-theme="overview"] {
+      --theme-primary: #1d3b2b;
+      --theme-secondary: #2f5942;
+      --theme-soft-bg: #eef4f0;
+      --theme-soft-border: #c5d6cc;
+    }
+
+    body[data-theme="day0"] {
+      --theme-primary: #1f4e78;
+      --theme-secondary: #2e6fa3;
+      --theme-soft-bg: #eef4fa;
+      --theme-soft-border: #c3d8eb;
+    }
+
+    body[data-theme="day1"] {
+      --theme-primary: #8a4f1d;
+      --theme-secondary: #b56b28;
+      --theme-soft-bg: #fbf3ea;
+      --theme-soft-border: #e8cfa9;
+    }
+
+    body[data-theme="day2"] {
+      --theme-primary: #27533b;
+      --theme-secondary: #3f7a58;
+      --theme-soft-bg: #edf5f0;
+      --theme-soft-border: #c1d9ca;
+    }
+
+    body[data-theme="day3"] {
+      --theme-primary: #9e2a22;
+      --theme-secondary: #c43c2a;
+      --theme-soft-bg: #fdf0ee;
+      --theme-soft-border: #ecc6c0;
     }
 
     * {
@@ -32,7 +73,7 @@
 
     body {
       margin: 0;
-      padding: 0 0 84px;
+      padding: 0 0 88px;
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
       font-size: 15px;
       background-color: var(--bg-paper);
@@ -59,7 +100,8 @@
       background: linear-gradient(155deg, #152b20 0%, #244734 55%, #372d23 100%);
       color: #fbf8f1;
       padding: 20px 16px 24px;
-      border-bottom: 4px solid var(--vermilion);
+      border-bottom: 4px solid var(--theme-secondary);
+      transition: border-color 0.25s ease;
     }
 
     .hero-svg-bg {
@@ -117,7 +159,7 @@
       color: rgba(251, 248, 241, 0.92);
     }
 
-    /* 固定タブナビゲーション */
+    /* 固定タブナビゲーション（横スクロールなし・5等分） */
     .top-nav {
       position: sticky;
       top: 0;
@@ -130,38 +172,55 @@
     .top-nav-inner {
       max-width: 680px;
       margin: 0 auto;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 8px 12px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .top-nav-inner::-webkit-scrollbar {
-      display: none;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      padding: 7px 8px;
     }
 
     .nav-tab {
-      flex: 0 0 auto;
+      min-width: 0;
       color: var(--ink-main);
-      font-size: 12.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 8px 13px;
+      padding: 7px 2px;
       min-height: 38px;
       display: inline-flex;
       align-items: center;
-      border-radius: 999px;
+      justify-content: center;
+      border-radius: 10px;
       background: var(--bg-sub);
       border: 1px solid transparent;
       cursor: pointer;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s ease;
     }
 
-    .nav-tab.active {
-      background: var(--forest-deep);
+    .nav-tab[data-view="overview"].active {
+      background: #1d3b2b;
       color: #fffdf9;
-      border-color: var(--forest-deep);
+    }
+
+    .nav-tab[data-view="day0"].active {
+      background: #1f4e78;
+      color: #fffdf9;
+    }
+
+    .nav-tab[data-view="day1"].active {
+      background: #8a4f1d;
+      color: #fffdf9;
+    }
+
+    .nav-tab[data-view="day2"].active {
+      background: #27533b;
+      color: #fffdf9;
+    }
+
+    .nav-tab[data-view="day3"].active {
+      background: #9e2a22;
+      color: #fffdf9;
     }
 
     /* メインコンテナ＆ビュー切り替え */
@@ -178,6 +237,7 @@
     section.card-section {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
+      border-top: 3px solid var(--theme-primary);
       border-radius: var(--radius-lg);
       padding: 16px 14px;
       margin-bottom: 14px;
@@ -201,14 +261,14 @@
       bottom: -2px;
       width: 56px;
       height: 2px;
-      background: var(--vermilion);
+      background: var(--theme-secondary);
     }
 
     h2.section-title {
       margin: 0;
       font-size: 18px;
       line-height: 1.35;
-      color: var(--forest-deep);
+      color: var(--theme-primary);
     }
 
     .section-sub {
@@ -236,10 +296,10 @@
     }
 
     .stat-card {
-      background: var(--bg-sub);
+      background: var(--theme-soft-bg);
       border-radius: var(--radius-md);
       padding: 10px 12px;
-      border: 1px solid var(--border-soft);
+      border: 1px solid var(--theme-soft-border);
     }
 
     .stat-label {
@@ -251,7 +311,7 @@
     .stat-val {
       font-size: 15px;
       font-weight: 800;
-      color: var(--forest-deep);
+      color: var(--theme-primary);
     }
 
     .alert-box {
@@ -264,13 +324,13 @@
     }
 
     .alert-box--info {
-      border-left-color: var(--forest-mid);
-      background: #f1f6f3;
+      border-left-color: var(--theme-secondary);
+      background: var(--theme-soft-bg);
     }
 
     /* 日程バナー＆タイムライン */
     .day-banner {
-      background: linear-gradient(90deg, var(--forest-deep), var(--forest-mid));
+      background: linear-gradient(90deg, var(--theme-primary), var(--theme-secondary));
       color: #fffdf9;
       padding: 13px 15px;
       border-radius: var(--radius-md);
@@ -303,7 +363,7 @@
     .timeline {
       position: relative;
       padding-left: 16px;
-      border-left: 2.5px solid var(--border-soft);
+      border-left: 2.5px solid var(--theme-soft-border);
       margin-left: 5px;
     }
 
@@ -324,7 +384,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--vermilion);
+      background: var(--theme-secondary);
       border: 2px solid #fffdf9;
     }
 
@@ -337,8 +397,12 @@
 
     .tl-time {
       font-weight: 800;
-      color: var(--vermilion);
-      font-size: 13.5px;
+      color: var(--theme-primary);
+      background: var(--theme-soft-bg);
+      border: 1px solid var(--theme-soft-border);
+      padding: 1px 7px;
+      border-radius: 6px;
+      font-size: 13px;
     }
 
     .tl-title {
@@ -354,25 +418,41 @@
       color: var(--ink-muted);
     }
 
+    /* 埋め込みGoogleマップ */
+    .map-embed-wrap {
+      margin-top: 10px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--theme-soft-border);
+      background: var(--theme-soft-bg);
+    }
+
+    .map-embed-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 205px;
+      border: 0;
+    }
+
     /* 時間帯に組み込む関連ブロック（補給・温泉・エスケープ） */
     .sub-block {
       margin-top: 10px;
       padding: 10px 11px;
       border-radius: var(--radius-sm);
-      background: var(--bg-paper);
-      border: 1px solid var(--border-soft);
+      background: var(--theme-soft-bg);
+      border: 1px solid var(--theme-soft-border);
     }
 
     .sub-block-title {
       font-size: 12.5px;
       font-weight: 800;
-      color: var(--forest-deep);
+      color: var(--theme-primary);
       margin: 0 0 6px;
     }
 
     .sub-entry {
       padding: 7px 0;
-      border-top: 1px dashed var(--border-soft);
+      border-top: 1px dashed var(--theme-soft-border);
     }
 
     .sub-entry:first-of-type {
@@ -429,24 +509,24 @@
     }
 
     .btn:hover {
-      border-color: var(--forest-mid);
-      background: #f3f7f4;
+      border-color: var(--theme-secondary);
+      background: var(--theme-soft-bg);
     }
 
     .btn--primary {
-      background: var(--forest-deep);
+      background: var(--theme-primary);
       color: #fffdf9;
-      border-color: var(--forest-deep);
+      border-color: var(--theme-primary);
     }
 
     .btn--primary:hover {
-      background: var(--forest-mid);
+      background: var(--theme-secondary);
     }
 
     .btn--copy.copied {
-      background: #1d3b2b;
+      background: var(--theme-primary);
       color: #fff;
-      border-color: #1d3b2b;
+      border-color: var(--theme-primary);
     }
 
     /* 持ち物チェックリスト */
@@ -457,7 +537,7 @@
     .gear-group h3 {
       margin: 0 0 8px;
       font-size: 14.5px;
-      color: var(--forest-deep);
+      color: var(--theme-primary);
     }
 
     .gear-item {
@@ -478,7 +558,7 @@
       width: 20px;
       height: 20px;
       flex-shrink: 0;
-      accent-color: var(--forest-deep);
+      accent-color: var(--theme-primary);
       cursor: pointer;
     }
 
@@ -504,21 +584,97 @@
       background: #fff;
     }
 
-    /* 日送りフッターナビ */
-    .day-switcher-footer {
+    /* ページ下部 固定アイコンフッター（横スクロールなし・5等分） */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      background: rgba(255, 253, 249, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border-soft);
+      box-shadow: 0 -4px 16px rgba(29, 59, 43, 0.08);
+      padding: 4px 6px calc(4px + env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+    }
+
+    .bnav-btn {
+      min-width: 0;
       display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 16px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 5px 2px;
+      min-height: 50px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .bnav-icon {
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .bnav-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .bnav-btn[data-view="overview"].active {
+      background: #eef4f0;
+      color: #1d3b2b;
+      border-color: #c5d6cc;
+    }
+
+    .bnav-btn[data-view="day0"].active {
+      background: #eef4fa;
+      color: #1f4e78;
+      border-color: #c3d8eb;
+    }
+
+    .bnav-btn[data-view="day1"].active {
+      background: #fbf3ea;
+      color: #8a4f1d;
+      border-color: #e8cfa9;
+    }
+
+    .bnav-btn[data-view="day2"].active {
+      background: #edf5f0;
+      color: #27533b;
+      border-color: #c1d9ca;
+    }
+
+    .bnav-btn[data-view="day3"].active {
+      background: #fdf0ee;
+      color: #9e2a22;
+      border-color: #ecc6c0;
     }
 
     .toast {
       position: fixed;
       left: 50%;
-      bottom: 24px;
+      bottom: 72px;
       max-width: 90vw;
       transform: translateX(-50%) translateY(16px);
-      background: var(--forest-deep);
+      background: var(--theme-primary);
       color: #fffdf9;
       padding: 9px 14px;
       border-radius: 999px;
@@ -540,7 +696,7 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="overview">
 
   <header class="hero" id="top">
     <svg class="hero-svg-bg" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
@@ -577,7 +733,7 @@
       </div>
       <h1 class="hero-title">熊野古道 中辺路 2泊3日ロングトレイル</h1>
       <p class="hero-subtitle">
-        世界遺産の古道と温泉キャンプを楽しむ、歩いて旅する熊野詣。日程タブを切り替えてその日の流れを確認できます。
+        世界遺産の古道と温泉キャンプを楽しむ、歩いて旅する熊野詣。日程タブや下部バーからその日の流れを確認できます。
       </p>
     </div>
   </header>
@@ -597,7 +753,7 @@
     <div class="view-panel" data-view-panel="overview">
       <section class="card-section">
         <div class="section-head">
-          <h2 class="section-title">⛩️ 概要・注意事項</h2>
+          <h2 class="section-title">🎒 概要・注意事項</h2>
           <span class="section-sub">定員：6名（最大8名増員可／元枠表記：定員4名・車増発有りなら枠拡大）</span>
         </div>
 
@@ -679,9 +835,9 @@
     <!-- Day0(11/19) -->
     <div class="view-panel" data-view-panel="day0" hidden>
       <div class="day-banner">
-        <h2>Day0(11/19)｜車両受取＆新宿地上合流</h2>
+        <h2>🚗 Day0(11/19)｜車両受取・新宿合流〜熊野本宮大社着</h2>
         <div class="day-banner-meta">
-          <span class="day-pill">レンタカー移動</span>
+          <span class="day-pill">レンタカー夜間移動</span>
           <span class="day-pill">ニコレン中野坂上 3泊4日 55,110円</span>
         </div>
       </div>
@@ -695,6 +851,9 @@
             </div>
             <p class="tl-note">車両受取・確認。運転免許証を忘れずに持参。</p>
             <div class="address-line">📍 〒164-0012 東京都中野区本町２丁目４６−４</div>
+            <div class="map-embed-wrap">
+              <iframe title="ニコニコレンタカー 中野坂上駅店 マップ" src="https://maps.google.com/maps?q=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒164-0012 東京都中野区本町２丁目４６−４">📋 住所コピー</button>
               <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
@@ -708,10 +867,34 @@
             </div>
             <p class="tl-note">駐車場には入れず、<strong>東京モード学園 横の地上側歩道沿い</strong>で合流・迅速に荷物を積み込んで出発します。事前待機で停車時間を短くします。</p>
             <div class="address-line">📍 〒160-0023 東京都新宿区西新宿１丁目７−３（地上側歩道沿い）</div>
+            <div class="map-embed-wrap">
+              <iframe title="東京モード学園 横 マップ" src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E3%83%A2%E3%83%BC%E3%83%89%E5%AD%A6%E5%9C%92%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF1-7-3&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒160-0023 東京都新宿区西新宿１丁目７−３">📋 住所コピー</button>
               <a class="btn" href="https://maps.app.goo.gl/Xz5Q8orjNSVQrFi96?g_st=ic" target="_blank" rel="noopener">🗺️ 集合マップ</a>
               <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E3%83%A2%E3%83%BC%E3%83%89%E5%AD%A6%E5%9C%92%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF1-7-3" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-time-row">
+              <span class="tl-time">夜間移動</span>
+              <span class="tl-title">高速道路・紀伊半島方面へ交代運転</span>
+            </div>
+            <p class="tl-note">SA/PAで休憩と運転交代を行いながら和歌山・本宮エリアへ向かいます。車内での睡眠・体調管理を優先。</p>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-time-row">
+              <span class="tl-time">翌 04:00〜05:00</span>
+              <span class="tl-title">熊野本宮大社 到着想定（河川敷駐車場へ）</span>
+            </div>
+            <p class="tl-note">翌朝4:00〜5:00頃に熊野本宮大社エリアへ到着想定。Day1の05:00河川敷駐車場デポ・05:44バス乗車へつなぎます。</p>
+            <div class="address-line">📍 〒647-1731 和歌山県田辺市本宮町本宮1110（河川敷駐車場：田辺市本宮町本宮）</div>
+            <div class="btn-row">
+              <button class="btn btn--copy" type="button" data-copy="〒647-1731 和歌山県田辺市本宮町本宮1110">📋 住所コピー</button>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%9C%AC%E5%AE%AE1110" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
         </div>
@@ -721,7 +904,7 @@
     <!-- Day1(11/20) -->
     <div class="view-panel" data-view-panel="day1" hidden>
       <div class="day-banner">
-        <h2>Day1(11/20)｜滝尻〜高原霧の里〜近露</h2>
+        <h2>⛺️ Day1(11/20)｜滝尻〜高原霧の里〜近露</h2>
         <div class="day-banner-meta">
           <span class="day-pill">14.1km / 1,170m / 7h</span>
           <span class="day-pill">宿泊：アイリスパーク</span>
@@ -737,9 +920,12 @@
             </div>
             <p class="tl-note">車をデポ（下山着などのデポも活用可能）。</p>
             <div class="address-line">📍 和歌山県田辺市本宮町本宮 熊野本宮大社 河川敷駐車場</div>
+            <div class="map-embed-wrap">
+              <iframe title="熊野本宮大社 マップ" src="https://maps.google.com/maps?q=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%9C%AC%E5%AE%AE1110&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="和歌山県田辺市本宮町本宮 熊野本宮大社 河川敷駐車場">📋 住所コピー</button>
-              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E6%B2%B3%E5%B7%9D%E6%95%B7%E5%8B%99%E8%BB%92%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E9%87%8E%E6%9C%AC%E5%AE%AE%E5%A4%A7%E7%A4%BE%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E6%9C%AC%E5%AE%AE1110" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
 
@@ -820,6 +1006,9 @@
             </div>
             <p class="tl-note">予約済 ✅ 6人 2,300円/人（0739-65-0410）。翌朝4:00出発のため早めの就寝を。</p>
             <div class="address-line">📍 〒646-1402 和歌山県田辺市中辺路町近露414-1</div>
+            <div class="map-embed-wrap">
+              <iframe title="アイリスパークオートキャンプ場 マップ" src="https://maps.google.com/maps?q=%E3%82%A2%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%83%BC%E3%83%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E4%B8%AD%E8%BE%BA%E8%B7%AF%E7%94%BA%E8%BF%91%E9%9C%B2414-1&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒646-1402 和歌山県田辺市中辺路町近露414-1">📋 住所コピー</button>
               <a class="btn" href="https://irispark.jp" target="_blank" rel="noopener">🌐 公式サイト</a>
@@ -834,7 +1023,7 @@
     <!-- Day2(11/21) -->
     <div class="view-panel" data-view-panel="day2" hidden>
       <div class="day-banner">
-        <h2>Day2(11/21)｜近露〜発心門王子〜本宮大社〜川湯</h2>
+        <h2>⛰️ Day2(11/21)｜近露〜発心門王子〜本宮大社〜川湯</h2>
         <div class="day-banner-meta">
           <span class="day-pill">30km / 1,520m / 12.5h</span>
           <span class="day-pill">バスエスケープ可</span>
@@ -969,6 +1158,9 @@
             </div>
             <p class="tl-note">当日受付（0735-42-1168）。</p>
             <div class="address-line">📍 〒647-1732 和歌山県田辺市本宮町川湯1452</div>
+            <div class="map-embed-wrap">
+              <iframe title="田辺川湯キャンプ場 マップ" src="https://maps.google.com/maps?q=%E7%94%B0%E8%BE%BA%E5%B7%9D%E6%B9%AF%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%97%E5%A0%B4%20%E7%94%B0%E8%BE%BA%E5%B8%82%E6%9C%AC%E5%AE%AE%E7%94%BA%E5%B7%9D%E6%B9%AF1452&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒647-1732 和歌山県田辺市本宮町川湯1452">📋 住所コピー</button>
               <a class="btn" href="https://tanabe-kawayu-camp.com" target="_blank" rel="noopener">🌐 公式サイト</a>
@@ -1004,7 +1196,7 @@
     <!-- Day3(11/22) -->
     <div class="view-panel" data-view-panel="day3" hidden>
       <div class="day-banner">
-        <h2>Day3(11/22)｜川湯発〜伊勢神宮〜帰京・返却</h2>
+        <h2>⛩️ Day3(11/22)｜川湯発〜伊勢神宮〜帰京・返却</h2>
         <div class="day-banner-meta">
           <span class="day-pill">観光・帰路・レンタカー返却</span>
         </div>
@@ -1032,6 +1224,9 @@
             </div>
             <p class="tl-note">参拝・散策（12:00出発予定）。</p>
             <div class="address-line">📍 〒516-0023 三重県伊勢市宇治館町1（内宮）／〒516-0042 三重県伊勢市豊川町279（外宮）</div>
+            <div class="map-embed-wrap">
+              <iframe title="伊勢神宮 内宮 マップ" src="https://maps.google.com/maps?q=%E4%BC%8A%E5%8B%A2%E7%A5%9E%E5%AE%AE%20%E5%86%85%E5%AE%AE%20%E4%BC%8A%E5%8B%A2%E5%B8%82%E5%AE%87%E6%B2%BB%E9%A4%A8%E7%94%BA1&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒516-0023 三重県伊勢市宇治館町1">📋 住所コピー</button>
               <a class="btn" href="https://www.isejingu.or.jp/visit/course/" target="_blank" rel="noopener">🌐 参拝案内</a>
@@ -1083,15 +1278,38 @@
             <div class="address-line">📍 〒164-0012 東京都中野区本町２丁目４６−４</div>
             <div class="btn-row">
               <button class="btn btn--copy" type="button" data-copy="〒164-0012 東京都中野区本町２丁目４６−４">📋 住所コピー</button>
-              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%BD%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
+              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E3%83%AC%E3%83%B3%E3%82%BF%E3%82%AB%E3%83%BC%20%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85%E5%BA%97%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA%E6%9C%AC%E7%94%BA2-46-4" target="_blank" rel="noopener">🗺️ Googleマップ</a>
             </div>
           </div>
         </div>
       </section>
     </div>
-
-    <div class="day-switcher-footer" id="dayPager"></div>
   </main>
+
+  <footer class="bottom-nav" aria-label="下部アイコンナビゲーション">
+    <div class="bottom-nav-inner" id="bottomNav">
+      <button class="bnav-btn active" type="button" data-view="overview">
+        <span class="bnav-icon" aria-hidden="true">🎒</span>
+        <span class="bnav-label">概要/持物</span>
+      </button>
+      <button class="bnav-btn" type="button" data-view="day0">
+        <span class="bnav-icon" aria-hidden="true">🚗</span>
+        <span class="bnav-label">Day0</span>
+      </button>
+      <button class="bnav-btn" type="button" data-view="day1">
+        <span class="bnav-icon" aria-hidden="true">⛺️</span>
+        <span class="bnav-label">Day1</span>
+      </button>
+      <button class="bnav-btn" type="button" data-view="day2">
+        <span class="bnav-icon" aria-hidden="true">⛰️</span>
+        <span class="bnav-label">Day2</span>
+      </button>
+      <button class="bnav-btn" type="button" data-view="day3">
+        <span class="bnav-icon" aria-hidden="true">⛩️</span>
+        <span class="bnav-label">Day3</span>
+      </button>
+    </div>
+  </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite">コピーしました</div>
 
@@ -1145,57 +1363,26 @@
         }
       });
 
-      const viewOrder = [
-        { key: "overview", label: "概要/持ち物" },
-        { key: "day0", label: "Day0(11/19)" },
-        { key: "day1", label: "Day1(11/20)" },
-        { key: "day2", label: "Day2(11/21)" },
-        { key: "day3", label: "Day3(11/22)" }
-      ];
-
       const navTabs = document.querySelectorAll(".nav-tab");
+      const bnavBtns = document.querySelectorAll(".bnav-btn");
       const viewPanels = document.querySelectorAll(".view-panel");
-      const pagerEl = document.getElementById("dayPager");
-
-      function renderPager(currentKey) {
-        const idx = viewOrder.findIndex((v) => v.key === currentKey);
-        const prev = idx > 0 ? viewOrder[idx - 1] : null;
-        const next = idx >= 0 && idx < viewOrder.length - 1 ? viewOrder[idx + 1] : null;
-        pagerEl.innerHTML = "";
-
-        if (prev) {
-          const prevBtn = document.createElement("button");
-          prevBtn.type = "button";
-          prevBtn.className = "btn";
-          prevBtn.style.flex = "1";
-          prevBtn.textContent = "← " + prev.label;
-          prevBtn.addEventListener("click", () => switchView(prev.key));
-          pagerEl.appendChild(prevBtn);
-        }
-        if (next) {
-          const nextBtn = document.createElement("button");
-          nextBtn.type = "button";
-          nextBtn.className = "btn btn--primary";
-          nextBtn.style.flex = "1";
-          nextBtn.textContent = next.label + " →";
-          nextBtn.addEventListener("click", () => switchView(next.key));
-          pagerEl.appendChild(nextBtn);
-        }
-      }
 
       function switchView(key) {
+        document.body.setAttribute("data-theme", key);
         navTabs.forEach((t) => t.classList.toggle("active", t.dataset.view === key));
+        bnavBtns.forEach((b) => b.classList.toggle("active", b.dataset.view === key));
         viewPanels.forEach((p) => {
           p.hidden = p.dataset.viewPanel !== key;
         });
-        renderPager(key);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       navTabs.forEach((tab) => {
         tab.addEventListener("click", () => switchView(tab.dataset.view));
       });
-      renderPager("overview");
+      bnavBtns.forEach((btn) => {
+        btn.addEventListener("click", () => switchView(btn.dataset.view));
+      });
 
       // 持ち物チェックリスト（端末保存）
       const STORAGE_KEY = "kumano_kodo_2026_gear_v3";
